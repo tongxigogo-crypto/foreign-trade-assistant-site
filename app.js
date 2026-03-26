@@ -17,7 +17,7 @@
     home_cta_docs: "查看项目文档",
     home_footer_note: "持续构建 · 持续交付 · 持续进化",
 
-    hero_right_kicker: "Current Focus",
+    hero_right_kicker: "CURRENT FOCUS · 当前重点项目",
     hero_right_title: "外贸助理（Trade Assistant）",
     hero_right_desc: "当前主线是可追溯、可解释、低错误率的 AI 决策层，目标是服务真实业务并形成可验证的产品闭环。",
     hero_right_point_1: "• 本地优先：业务数据默认在用户设备",
@@ -105,7 +105,7 @@
     home_cta_docs: "View Project Docs",
     home_footer_note: "Build Fast · Ship Often · Improve Continuously",
 
-    hero_right_kicker: "Current Focus",
+    hero_right_kicker: "CURRENT FOCUS · Featured Project",
     hero_right_title: "Trade Assistant",
     hero_right_desc: "Current track is a traceable, explainable, low-error AI decision layer for real business workflows.",
     hero_right_point_1: "• Local-first: business data stays on user device by default",
