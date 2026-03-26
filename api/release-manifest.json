@@ -1,14 +1,14 @@
 ﻿{
-  "version": "v0.1.1-beta1-build8",
+  "version": "v0.1.1-beta1-build10",
   "published_at": "2026-03-27T00:00:00Z",
   "assets": [
     {
-      "name": "TA_Beta_v0.1.1-beta1-build8_windows.zip",
-      "url": "./assets/downloads/TA_Beta_v0.1.1-beta1-build8_windows.zip"
+      "name": "TA_Beta_build10_windows.zip",
+      "url": "./assets/downloads/TA_Beta_build10_windows.zip"
     },
     {
-      "name": "TA_Beta_v0.1.1-beta1-build8_mac.zip",
-      "url": "./assets/downloads/TA_Beta_v0.1.1-beta1-build8_mac.zip"
+      "name": "TA_Beta_build10_mac.zip",
+      "url": "./assets/downloads/TA_Beta_build10_mac.zip"
     }
   ]
 }
