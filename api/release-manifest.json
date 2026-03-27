@@ -1,5 +1,5 @@
 ﻿{
-  "version": "v0.1.1-beta1-build10",
+  "version": "v0.1.1-beta1-build11",
   "published_at": "2026-03-27T00:00:00Z",
   "assets": [
     {
@@ -7,8 +7,8 @@
       "url": "./assets/downloads/TA_Beta_build10_windows.zip"
     },
     {
-      "name": "TA_Beta_build10_mac.zip",
-      "url": "./assets/downloads/TA_Beta_build10_mac.zip"
+      "name": "TA_Beta_build11_mac.zip",
+      "url": "./assets/downloads/TA_Beta_build11_mac.zip"
     }
   ]
 }
