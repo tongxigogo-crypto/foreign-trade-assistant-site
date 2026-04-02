@@ -1,18 +1,18 @@
 ﻿{
-  "version": "v0.1.1-beta1-build29",
-  "published_at": "2026-03-30T02:00:25+08:00",
-  "assets": [
-    {
-      "name": "TA_Beta_v0.1.1-beta1-build29_windows.zip",
-      "url": "./assets/downloads/TA_Beta_v0.1.1-beta1-build29_windows.zip"
-    },
-    {
-      "name": "TA_Beta_v0.1.1-beta1-build29_mac.dmg",
-      "url": "./assets/downloads/TA_Beta_v0.1.1-beta1-build29_mac.dmg"
-    },
-    {
-      "name": "TA_Beta_v0.1.1-beta1-build29_mac.zip",
-      "url": "./assets/downloads/TA_Beta_v0.1.1-beta1-build29_mac.zip"
-    }
-  ]
+    "version":  "v0.1.1-beta2-build37",
+    "published_at":  "2026-04-03T00:30:00+08:00",
+    "assets":  [
+                   {
+                       "name":  "TA_Beta_v0.1.1-beta2-build37_windows.zip",
+                       "url":  "https://tongxigogo-crypto.github.io/foreign-trade-assistant-site/assets/downloads/TA_Beta_v0.1.1-beta2-build37_windows.zip"
+                   },
+                   {
+                       "name":  "TA_Beta_v0.1.1-beta2-build37_mac.zip",
+                       "url":  "https://tongxigogo-crypto.github.io/foreign-trade-assistant-site/assets/downloads/TA_Beta_v0.1.1-beta2-build37_mac.zip"
+                   },
+                   {
+                       "name":  "TA_Beta_v0.1.1-beta2-build37_mac.dmg",
+                       "url":  "https://tongxigogo-crypto.github.io/foreign-trade-assistant-site/assets/downloads/TA_Beta_v0.1.1-beta2-build37_mac.dmg"
+                   }
+               ]
 }
