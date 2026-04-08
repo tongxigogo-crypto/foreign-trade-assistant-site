@@ -42,6 +42,21 @@ code {
   will-change: transform;
 }
 
+.pretext-target[data-pretext-mode="hero"] {
+  display: inline-block;
+}
+
+.pretext-hero-block {
+  display: inline-block;
+  transform-origin: left center;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), text-shadow 220ms ease, filter 220ms ease, letter-spacing 220ms ease;
+  will-change: transform, text-shadow, filter;
+}
+
+.pretext-hero-block.is-active {
+  filter: drop-shadow(0 0 24px rgba(143, 245, 255, 0.08));
+}
+
 .pretext-line {
   display: block;
 }
@@ -51,7 +66,7 @@ code {
   min-width: 0.02em;
   transform: translate3d(0, 0, 0);
   transform-origin: 50% 70%;
-  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), opacity 240ms ease, color 240ms ease;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease, color 220ms ease;
   will-change: transform;
 }
 
@@ -60,7 +75,16 @@ code {
 }
 
 .pretext-target.is-active .pretext-char {
-  transition-duration: 120ms;
+  transition-duration: 90ms;
+}
+
+.pretext-target[data-pretext-mode="hero"] .pretext-char {
+  text-shadow: 0 0 28px rgba(255, 255, 255, 0.03);
+}
+
+.pretext-hero-subtitle {
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease;
+  will-change: transform, opacity;
 }
 
 .pretext-magnetic {
@@ -75,6 +99,8 @@ code {
 
 @media (prefers-reduced-motion: reduce) {
   .pretext-char,
+  .pretext-hero-subtitle,
+  .pretext-hero-block,
   .pretext-magnetic {
     transition: none !important;
     transform: none !important;

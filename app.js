@@ -211,6 +211,7 @@ function clearPretextTarget(element) {
   if (!element || !element.dataset.pretextSource) return;
   element.innerHTML = element.dataset.pretextSource;
   element.classList.remove("pretext-target", "is-active");
+  element.removeAttribute("data-pretext-mode");
   delete element.dataset.pretextReady;
 }
 
@@ -237,7 +238,7 @@ function buildPretextFragment(html) {
   return fragment;
 }
 
-function preparePretextTarget(element) {
+function preparePretextTarget(element, mode = "basic") {
   if (!element) return;
   if (!element.dataset.pretextSource) {
     element.dataset.pretextSource = element.innerHTML.trim();
@@ -245,21 +246,30 @@ function preparePretextTarget(element) {
 
   clearPretextTarget(element);
   element.dataset.pretextReady = "true";
+  element.dataset.pretextMode = mode;
   element.classList.add("pretext-target");
   element.appendChild(buildPretextFragment(element.dataset.pretextSource));
 }
 
-function attachPretextMotion(element) {
-  preparePretextTarget(element);
+function attachPretextMotion(element, options = {}) {
+  const {
+    mode = "basic",
+    radius = 140,
+    moveXFactor = 0.032,
+    moveYFactor = 0.052,
+    rotateFactor = 0.012
+  } = options;
+
+  preparePretextTarget(element, mode);
   if (element.dataset.pretextBound === "true") return;
   element.dataset.pretextBound = "true";
-  const chars = [...element.querySelectorAll(".pretext-char")];
+  const baseChars = [...element.querySelectorAll(".pretext-char")];
   let frameId = null;
   let pointer = null;
 
   function resetChars() {
     element.classList.remove("is-active");
-    chars.forEach((char) => {
+    baseChars.forEach((char) => {
       char.style.transform = "";
       char.style.opacity = "";
     });
@@ -273,7 +283,7 @@ function attachPretextMotion(element) {
     }
 
     element.classList.add("is-active");
-    chars.forEach((char) => {
+    baseChars.forEach((char) => {
       if (char.classList.contains("is-space")) return;
 
       const rect = char.getBoundingClientRect();
@@ -282,7 +292,6 @@ function attachPretextMotion(element) {
       const dx = pointer.x - cx;
       const dy = pointer.y - cy;
       const distance = Math.hypot(dx, dy);
-      const radius = 140;
 
       if (distance > radius) {
         char.style.transform = "";
@@ -291,9 +300,9 @@ function attachPretextMotion(element) {
       }
 
       const strength = 1 - distance / radius;
-      const moveX = dx * 0.032 * strength;
-      const moveY = dy * 0.052 * strength;
-      const rotate = dx * 0.012 * strength;
+      const moveX = dx * moveXFactor * strength;
+      const moveY = dy * moveYFactor * strength;
+      const rotate = dx * rotateFactor * strength;
 
       char.style.transform = `translate3d(${moveX.toFixed(2)}px, ${moveY.toFixed(2)}px, 0) rotate(${rotate.toFixed(2)}deg)`;
       char.style.opacity = (0.88 + strength * 0.12).toFixed(2);
@@ -308,6 +317,52 @@ function attachPretextMotion(element) {
   element.addEventListener("pointerleave", () => {
     pointer = null;
     if (!frameId) frameId = window.requestAnimationFrame(updateChars);
+  });
+}
+
+function attachHeroSubtitleMotion(element, heroElement) {
+  if (!element || element.dataset.pretextSubtitleBound === "true") return;
+  element.dataset.pretextSubtitleBound = "true";
+  element.classList.add("pretext-hero-subtitle");
+
+  heroElement.addEventListener("pointermove", (event) => {
+    const rect = heroElement.getBoundingClientRect();
+    const offsetX = event.clientX - (rect.left + rect.width / 2);
+    const offsetY = event.clientY - (rect.top + rect.height / 2);
+    element.style.transform = `translate3d(${(offsetX * 0.012).toFixed(2)}px, ${(offsetY * 0.018).toFixed(2)}px, 0)`;
+    element.style.opacity = "0.92";
+  });
+
+  heroElement.addEventListener("pointerleave", () => {
+    element.style.transform = "";
+    element.style.opacity = "";
+  });
+}
+
+function attachHeroBlockMotion(element) {
+  if (!element || element.dataset.pretextHeroBlockBound === "true") return;
+  element.dataset.pretextHeroBlockBound = "true";
+  element.classList.add("pretext-hero-block");
+
+  element.addEventListener("pointermove", (event) => {
+    const rect = element.getBoundingClientRect();
+    const offsetX = event.clientX - (rect.left + rect.width / 2);
+    const offsetY = event.clientY - (rect.top + rect.height / 2);
+    const moveX = offsetX * 0.022;
+    const moveY = offsetY * 0.032;
+    const skew = offsetX * 0.008;
+
+    element.style.transform = `translate3d(${moveX.toFixed(2)}px, ${moveY.toFixed(2)}px, 0) skewX(${skew.toFixed(2)}deg)`;
+    element.style.textShadow = `${(offsetX * 0.045).toFixed(2)}px ${(offsetY * 0.018).toFixed(2)}px 0 rgba(143, 245, 255, 0.36), ${(-offsetX * 0.03).toFixed(2)}px ${(-offsetY * 0.012).toFixed(2)}px 0 rgba(191, 129, 255, 0.26)`;
+    element.style.letterSpacing = `${(-0.04 + Math.min(Math.abs(offsetX) / 800, 0.12)).toFixed(3)}em`;
+    element.classList.add("is-active");
+  });
+
+  element.addEventListener("pointerleave", () => {
+    element.style.transform = "";
+    element.style.textShadow = "";
+    element.style.letterSpacing = "";
+    element.classList.remove("is-active");
   });
 }
 
@@ -346,23 +401,22 @@ function initHomePretext() {
 
   if (!allowMotion) return;
 
-  const textTargets = [
-    ...document.querySelectorAll("nav a, nav button"),
-    ...document.querySelectorAll("main h1, main h2, main h3, main h4"),
-    ...document.querySelectorAll("main a.rounded-sm"),
-    ...document.querySelectorAll("main .text-3xl.font-bold.text-primary")
+  const heroTitle = document.querySelector("[data-i18n='home_big_title']");
+  const heroSubtitle = document.querySelector("[data-i18n='home_subtitle']");
+  const heroActions = [
+    ...document.querySelectorAll("a[data-i18n='home_cta_download'], a[data-i18n='home_cta_docs']")
   ];
 
-  const magneticTargets = [
-    ...document.querySelectorAll("nav button, main a.rounded-sm")
-  ];
+  if (heroTitle) {
+    clearPretextTarget(heroTitle);
+    attachHeroBlockMotion(heroTitle);
+  }
 
-  [...new Set(textTargets)].forEach((element) => {
-    element.dataset.pretext = "interactive";
-    attachPretextMotion(element);
-  });
+  if (heroSubtitle && heroTitle) {
+    attachHeroSubtitleMotion(heroSubtitle, heroTitle);
+  }
 
-  [...new Set(magneticTargets)].forEach((element) => {
+  [...new Set(heroActions)].forEach((element) => {
     attachMagneticPull(element);
   });
 }
