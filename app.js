@@ -10,22 +10,25 @@
     release_label: "当前版本",
 
     home_kicker: "PERSONAL DEV PORTFOLIO",
-    home_big_title: "TONGXI LAB",
+    home_big_title: "TONGXI<br/>LAB",
     home_title: "个人开发网站",
     home_subtitle: "这是我的个人开发网站，用于展示我持续迭代的应用与自动化产品。外贸助理是当前主推项目，后续会陆续上架更多作品。",
     home_cta_download: "体验外贸助理",
     home_cta_docs: "查看项目文档",
     home_footer_note: "持续构建 · 持续交付 · 持续进化",
 
+    hero_right_kicker: "Current Focus",
+    hero_right_title: "外贸助理（Trade Assistant）",
+    hero_right_desc: "当前主线是可追溯、可解释、低错误率的 AI 决策层，目标是服务真实业务并形成可验证的产品闭环。",
+    hero_right_point_1: "• 本地优先：业务数据默认在用户设备",
+    hero_right_point_2: "• 自动成长：基于编辑反馈持续优化",
+    hero_right_point_3: "• 模型可切换：减少平台绑定",
+
     feature_section_1_title: "网站定位",
     feature_section_1_desc: "一个可持续更新的个人产品站：展示能力、沉淀案例、连接用户反馈，并持续发布新版本。",
     feature_section_2_title: "当前主线",
-    feature_section_2_label: "CURRENT FOCUS · 当前主推产品",
     feature_section_2_headline: "外贸助理 Trade Assistant",
     feature_section_2_desc: "聚焦“自动成长 + 可追溯 + 跨模型复用”，服务不懂技术的一线业务用户。",
-    feature_section_2_point_1: "• 本地优先：业务数据默认在用户设备",
-    feature_section_2_point_2: "• 自动成长：基于编辑反馈持续优化",
-    feature_section_2_point_3: "• 模型可切换：减少平台绑定",
     feature_section_3_title: "已开发应用",
 
     feature_1_title: "外贸助理",
@@ -95,22 +98,25 @@
     release_label: "Version",
 
     home_kicker: "PERSONAL DEV PORTFOLIO",
-    home_big_title: "TONGXI LAB",
+    home_big_title: "TONGXI<br/>LAB",
     home_title: "Personal Dev Website",
     home_subtitle: "This is my personal development website for showcasing continuously evolving apps and automation products. Trade Assistant is the current focus, with more projects to be added.",
     home_cta_download: "Try Trade Assistant",
     home_cta_docs: "View Project Docs",
     home_footer_note: "Build Fast · Ship Often · Improve Continuously",
 
+    hero_right_kicker: "Current Focus",
+    hero_right_title: "Trade Assistant",
+    hero_right_desc: "Current track is a traceable, explainable, low-error AI decision layer for real business workflows.",
+    hero_right_point_1: "• Local-first: business data stays on user device by default",
+    hero_right_point_2: "• Adaptive growth: continuously improves from edit feedback",
+    hero_right_point_3: "• Multi-model ready: reduces platform lock-in",
+
     feature_section_1_title: "Site Positioning",
     feature_section_1_desc: "A continuously updated personal product site: show capabilities, accumulate cases, collect feedback, and ship new versions.",
     feature_section_2_title: "Current Mainline",
-    feature_section_2_label: "CURRENT FOCUS · Featured Product",
     feature_section_2_headline: "Trade Assistant",
     feature_section_2_desc: "Focused on adaptive growth, traceability, and model portability for non-technical frontline users.",
-    feature_section_2_point_1: "• Local-first: business data stays on user device by default",
-    feature_section_2_point_2: "• Adaptive growth: continuously improves from edit feedback",
-    feature_section_2_point_3: "• Multi-model ready: reduces platform lock-in",
     feature_section_3_title: "Built Applications",
 
     feature_1_title: "Trade Assistant",
@@ -171,6 +177,10 @@
   }
 };
 
+const HTML_I18N_KEYS = new Set([
+  "home_big_title"
+]);
+
 function byId(id) { return document.getElementById(id); }
 
 function applyLang(lang) {
@@ -180,7 +190,12 @@ function applyLang(lang) {
 
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
-    if (dict[key]) el.textContent = dict[key];
+    if (!dict[key]) return;
+    if (HTML_I18N_KEYS.has(key)) {
+      el.innerHTML = dict[key];
+      return;
+    }
+    el.textContent = dict[key];
   });
 
   const toggle = byId("lang-toggle");
@@ -190,6 +205,166 @@ function applyLang(lang) {
 function setFooterYear() {
   const y = byId("year");
   if (y) y.textContent = String(new Date().getFullYear());
+}
+
+function clearPretextTarget(element) {
+  if (!element || !element.dataset.pretextSource) return;
+  element.innerHTML = element.dataset.pretextSource;
+  element.classList.remove("pretext-target", "is-active");
+  delete element.dataset.pretextReady;
+}
+
+function buildPretextFragment(html) {
+  const fragment = document.createDocumentFragment();
+  const lines = html.split(/<br\s*\/?>/i);
+
+  lines.forEach((line, index) => {
+    const lineWrapper = document.createElement("span");
+    lineWrapper.className = "pretext-line";
+
+    for (const character of line) {
+      const charNode = document.createElement("span");
+      charNode.className = "pretext-char";
+      charNode.textContent = character === " " ? "\u00A0" : character;
+      if (character === " ") charNode.classList.add("is-space");
+      lineWrapper.appendChild(charNode);
+    }
+
+    fragment.appendChild(lineWrapper);
+    if (index < lines.length - 1) fragment.appendChild(document.createElement("br"));
+  });
+
+  return fragment;
+}
+
+function preparePretextTarget(element) {
+  if (!element) return;
+  if (!element.dataset.pretextSource) {
+    element.dataset.pretextSource = element.innerHTML.trim();
+  }
+
+  clearPretextTarget(element);
+  element.dataset.pretextReady = "true";
+  element.classList.add("pretext-target");
+  element.appendChild(buildPretextFragment(element.dataset.pretextSource));
+}
+
+function attachPretextMotion(element) {
+  preparePretextTarget(element);
+  if (element.dataset.pretextBound === "true") return;
+  element.dataset.pretextBound = "true";
+  const chars = [...element.querySelectorAll(".pretext-char")];
+  let frameId = null;
+  let pointer = null;
+
+  function resetChars() {
+    element.classList.remove("is-active");
+    chars.forEach((char) => {
+      char.style.transform = "";
+      char.style.opacity = "";
+    });
+  }
+
+  function updateChars() {
+    frameId = null;
+    if (!pointer) {
+      resetChars();
+      return;
+    }
+
+    element.classList.add("is-active");
+    chars.forEach((char) => {
+      if (char.classList.contains("is-space")) return;
+
+      const rect = char.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = pointer.x - cx;
+      const dy = pointer.y - cy;
+      const distance = Math.hypot(dx, dy);
+      const radius = 140;
+
+      if (distance > radius) {
+        char.style.transform = "";
+        char.style.opacity = "";
+        return;
+      }
+
+      const strength = 1 - distance / radius;
+      const moveX = dx * 0.032 * strength;
+      const moveY = dy * 0.052 * strength;
+      const rotate = dx * 0.012 * strength;
+
+      char.style.transform = `translate3d(${moveX.toFixed(2)}px, ${moveY.toFixed(2)}px, 0) rotate(${rotate.toFixed(2)}deg)`;
+      char.style.opacity = (0.88 + strength * 0.12).toFixed(2);
+    });
+  }
+
+  element.addEventListener("pointermove", (event) => {
+    pointer = { x: event.clientX, y: event.clientY };
+    if (!frameId) frameId = window.requestAnimationFrame(updateChars);
+  });
+
+  element.addEventListener("pointerleave", () => {
+    pointer = null;
+    if (!frameId) frameId = window.requestAnimationFrame(updateChars);
+  });
+}
+
+function attachMagneticPull(element) {
+  if (!element) return;
+  element.classList.add("pretext-magnetic");
+  if (element.dataset.pretextMagneticBound === "true") return;
+  element.dataset.pretextMagneticBound = "true";
+
+  element.addEventListener("pointermove", (event) => {
+    const rect = element.getBoundingClientRect();
+    const offsetX = event.clientX - (rect.left + rect.width / 2);
+    const offsetY = event.clientY - (rect.top + rect.height / 2);
+    const moveX = Math.max(Math.min(offsetX * 0.1, 10), -10);
+    const moveY = Math.max(Math.min(offsetY * 0.14, 8), -8);
+
+    element.style.setProperty("--mx", `${moveX.toFixed(2)}px`);
+    element.style.setProperty("--my", `${moveY.toFixed(2)}px`);
+    element.classList.add("is-pulled");
+  });
+
+  element.addEventListener("pointerleave", () => {
+    element.style.setProperty("--mx", "0px");
+    element.style.setProperty("--my", "0px");
+    element.classList.remove("is-pulled");
+  });
+}
+
+function initHomePretext() {
+  if (document.body.dataset.page !== "home") return;
+
+  const allowMotion = window.matchMedia("(pointer: fine)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.querySelectorAll("[data-pretext='interactive']").forEach(clearPretextTarget);
+
+  if (!allowMotion) return;
+
+  const textTargets = [
+    ...document.querySelectorAll("nav a, nav button"),
+    ...document.querySelectorAll("main h1, main h2, main h3, main h4"),
+    ...document.querySelectorAll("main a.rounded-sm"),
+    ...document.querySelectorAll("main .text-3xl.font-bold.text-primary")
+  ];
+
+  const magneticTargets = [
+    ...document.querySelectorAll("nav button, main a.rounded-sm")
+  ];
+
+  [...new Set(textTargets)].forEach((element) => {
+    element.dataset.pretext = "interactive";
+    attachPretextMotion(element);
+  });
+
+  [...new Set(magneticTargets)].forEach((element) => {
+    attachMagneticPull(element);
+  });
 }
 
 function setAssetLink(anchorId, nameId, asset, fallbackText) {
@@ -257,12 +432,14 @@ function init() {
   const lang = localStorage.getItem("ta_lang") || "zh";
   applyLang(lang);
   setFooterYear();
+  initHomePretext();
 
   const toggle = byId("lang-toggle");
   if (toggle) {
     toggle.addEventListener("click", () => {
       const next = (localStorage.getItem("ta_lang") || "zh") === "zh" ? "en" : "zh";
       applyLang(next);
+      initHomePretext();
     });
   }
 
