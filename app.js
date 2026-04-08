@@ -207,119 +207,6 @@ function setFooterYear() {
   if (y) y.textContent = String(new Date().getFullYear());
 }
 
-function clearPretextTarget(element) {
-  if (!element || !element.dataset.pretextSource) return;
-  element.innerHTML = element.dataset.pretextSource;
-  element.classList.remove("pretext-target", "is-active");
-  element.removeAttribute("data-pretext-mode");
-  delete element.dataset.pretextReady;
-}
-
-function buildPretextFragment(html) {
-  const fragment = document.createDocumentFragment();
-  const lines = html.split(/<br\s*\/?>/i);
-
-  lines.forEach((line, index) => {
-    const lineWrapper = document.createElement("span");
-    lineWrapper.className = "pretext-line";
-
-    for (const character of line) {
-      const charNode = document.createElement("span");
-      charNode.className = "pretext-char";
-      charNode.textContent = character === " " ? "\u00A0" : character;
-      if (character === " ") charNode.classList.add("is-space");
-      lineWrapper.appendChild(charNode);
-    }
-
-    fragment.appendChild(lineWrapper);
-    if (index < lines.length - 1) fragment.appendChild(document.createElement("br"));
-  });
-
-  return fragment;
-}
-
-function preparePretextTarget(element, mode = "basic") {
-  if (!element) return;
-  if (!element.dataset.pretextSource) {
-    element.dataset.pretextSource = element.innerHTML.trim();
-  }
-
-  clearPretextTarget(element);
-  element.dataset.pretextReady = "true";
-  element.dataset.pretextMode = mode;
-  element.classList.add("pretext-target");
-  element.appendChild(buildPretextFragment(element.dataset.pretextSource));
-}
-
-function attachPretextMotion(element, options = {}) {
-  const {
-    mode = "basic",
-    radius = 140,
-    moveXFactor = 0.032,
-    moveYFactor = 0.052,
-    rotateFactor = 0.012
-  } = options;
-
-  preparePretextTarget(element, mode);
-  if (element.dataset.pretextBound === "true") return;
-  element.dataset.pretextBound = "true";
-  const baseChars = [...element.querySelectorAll(".pretext-char")];
-  let frameId = null;
-  let pointer = null;
-
-  function resetChars() {
-    element.classList.remove("is-active");
-    baseChars.forEach((char) => {
-      char.style.transform = "";
-      char.style.opacity = "";
-    });
-  }
-
-  function updateChars() {
-    frameId = null;
-    if (!pointer) {
-      resetChars();
-      return;
-    }
-
-    element.classList.add("is-active");
-    baseChars.forEach((char) => {
-      if (char.classList.contains("is-space")) return;
-
-      const rect = char.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = pointer.x - cx;
-      const dy = pointer.y - cy;
-      const distance = Math.hypot(dx, dy);
-
-      if (distance > radius) {
-        char.style.transform = "";
-        char.style.opacity = "";
-        return;
-      }
-
-      const strength = 1 - distance / radius;
-      const moveX = dx * moveXFactor * strength;
-      const moveY = dy * moveYFactor * strength;
-      const rotate = dx * rotateFactor * strength;
-
-      char.style.transform = `translate3d(${moveX.toFixed(2)}px, ${moveY.toFixed(2)}px, 0) rotate(${rotate.toFixed(2)}deg)`;
-      char.style.opacity = (0.88 + strength * 0.12).toFixed(2);
-    });
-  }
-
-  element.addEventListener("pointermove", (event) => {
-    pointer = { x: event.clientX, y: event.clientY };
-    if (!frameId) frameId = window.requestAnimationFrame(updateChars);
-  });
-
-  element.addEventListener("pointerleave", () => {
-    pointer = null;
-    if (!frameId) frameId = window.requestAnimationFrame(updateChars);
-  });
-}
-
 function attachHeroSubtitleMotion(element, heroElement) {
   if (!element || element.dataset.pretextSubtitleBound === "true") return;
   element.dataset.pretextSubtitleBound = "true";
@@ -339,22 +226,33 @@ function attachHeroSubtitleMotion(element, heroElement) {
   });
 }
 
-function attachHeroBlockMotion(element) {
-  if (!element || element.dataset.pretextHeroBlockBound === "true") return;
-  element.dataset.pretextHeroBlockBound = "true";
-  element.classList.add("pretext-hero-block");
+function attachFieldMotion(element, options = {}) {
+  if (!element || element.dataset.pretextFieldBound === "true") return;
+  element.dataset.pretextFieldBound = "true";
+  element.classList.add("pretext-field");
+
+  const {
+    moveXFactor = 0.016,
+    moveYFactor = 0.024,
+    skewFactor = 0.005,
+    shadowXFactor = 0.026,
+    shadowYFactor = 0.012,
+    letterSpacingBase = 0,
+    letterSpacingRange = 0.04
+  } = options;
 
   element.addEventListener("pointermove", (event) => {
     const rect = element.getBoundingClientRect();
     const offsetX = event.clientX - (rect.left + rect.width / 2);
     const offsetY = event.clientY - (rect.top + rect.height / 2);
-    const moveX = offsetX * 0.022;
-    const moveY = offsetY * 0.032;
-    const skew = offsetX * 0.008;
+    const moveX = offsetX * moveXFactor;
+    const moveY = offsetY * moveYFactor;
+    const skew = offsetX * skewFactor;
+    const spacing = letterSpacingBase + Math.min(Math.abs(offsetX) / 900, letterSpacingRange);
 
     element.style.transform = `translate3d(${moveX.toFixed(2)}px, ${moveY.toFixed(2)}px, 0) skewX(${skew.toFixed(2)}deg)`;
-    element.style.textShadow = `${(offsetX * 0.045).toFixed(2)}px ${(offsetY * 0.018).toFixed(2)}px 0 rgba(143, 245, 255, 0.36), ${(-offsetX * 0.03).toFixed(2)}px ${(-offsetY * 0.012).toFixed(2)}px 0 rgba(191, 129, 255, 0.26)`;
-    element.style.letterSpacing = `${(-0.04 + Math.min(Math.abs(offsetX) / 800, 0.12)).toFixed(3)}em`;
+    element.style.textShadow = `${(offsetX * shadowXFactor).toFixed(2)}px ${(offsetY * shadowYFactor).toFixed(2)}px 0 rgba(143, 245, 255, 0.34), ${(-offsetX * shadowXFactor * 0.72).toFixed(2)}px ${(-offsetY * shadowYFactor * 0.72).toFixed(2)}px 0 rgba(191, 129, 255, 0.24)`;
+    element.style.letterSpacing = `${spacing.toFixed(3)}em`;
     element.classList.add("is-active");
   });
 
@@ -397,24 +295,52 @@ function initHomePretext() {
   const allowMotion = window.matchMedia("(pointer: fine)").matches &&
     !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  document.querySelectorAll("[data-pretext='interactive']").forEach(clearPretextTarget);
-
   if (!allowMotion) return;
 
   const heroTitle = document.querySelector("[data-i18n='home_big_title']");
   const heroSubtitle = document.querySelector("[data-i18n='home_subtitle']");
+  const homeTextTargets = [
+    ...document.querySelectorAll("nav a[data-i18n], nav button"),
+    ...document.querySelectorAll("main [data-i18n], footer [data-i18n]")
+  ].filter((element) => {
+    return !["SCRIPT", "STYLE"].includes(element.tagName);
+  });
   const heroActions = [
     ...document.querySelectorAll("a[data-i18n='home_cta_download'], a[data-i18n='home_cta_docs']")
   ];
 
   if (heroTitle) {
-    clearPretextTarget(heroTitle);
-    attachHeroBlockMotion(heroTitle);
+    attachFieldMotion(heroTitle, {
+      moveXFactor: 0.022,
+      moveYFactor: 0.032,
+      skewFactor: 0.008,
+      shadowXFactor: 0.045,
+      shadowYFactor: 0.018,
+      letterSpacingBase: -0.04,
+      letterSpacingRange: 0.12
+    });
   }
 
   if (heroSubtitle && heroTitle) {
     attachHeroSubtitleMotion(heroSubtitle, heroTitle);
   }
+
+  [...new Set(homeTextTargets)].forEach((element) => {
+    if (element === heroTitle || element === heroSubtitle) return;
+    const tag = element.tagName;
+    const isLargeHeading = ["H2", "H3", "H4"].includes(tag);
+    const isBody = ["P", "DIV", "SPAN"].includes(tag);
+
+    attachFieldMotion(element, {
+      moveXFactor: isLargeHeading ? 0.015 : isBody ? 0.01 : 0.012,
+      moveYFactor: isLargeHeading ? 0.022 : isBody ? 0.014 : 0.018,
+      skewFactor: isLargeHeading ? 0.0045 : 0.003,
+      shadowXFactor: isLargeHeading ? 0.02 : 0.012,
+      shadowYFactor: isLargeHeading ? 0.01 : 0.007,
+      letterSpacingBase: 0,
+      letterSpacingRange: isLargeHeading ? 0.03 : 0.015
+    });
+  });
 
   [...new Set(heroActions)].forEach((element) => {
     attachMagneticPull(element);
