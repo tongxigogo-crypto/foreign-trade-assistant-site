@@ -43,7 +43,6 @@
     release_desc: "本地优先、可追溯、可成长的外贸 AI 参谋。当前版本会同步到这个个人站的下载页与文档页。",
     release_cta_primary: "打开下载页",
     release_cta_secondary: "查看新手文档",
-    footer_note: "故事在继续，产品也在继续生长。",
 
     download_kicker: "发布渠道",
     download_title: "外贸助理下载",
@@ -55,35 +54,69 @@
     download_button_mac_zip: "下载 macOS ZIP",
     download_mac_hint: "DMG = 常规安装 · ZIP = 便携解压",
     download_notice_title: "安装提示",
+    download_notice_heading: "安装前先看这一页",
     download_notice_1: "先看新手文档，再开始安装。",
     download_notice_2: "macOS 首次可能出现“未验证开发者”，按文档流程放行。",
     download_notice_3: "建议保留上一个稳定包，出现问题可快速回滚。",
     download_fallback_note: "如果站内资源不可用，页面会自动回退到 GitHub Release。",
+    download_route_kicker: "GET STARTED",
+    download_route_title: "先装，再让它学会你的习惯",
+    download_route_desc: "安装完成后，先配置 API，再导入历史资料和邮件线程，让外贸助理开始在真实业务语境里成长。",
+    download_route_cta: "打开安装文档",
+    download_aside_kicker: "WORLD ROUTE",
+    download_aside_title: "先拿到安装包，再进入文档和隐私说明",
+    download_aside_desc: "下载页负责交付，文档页负责安装，隐私页负责说明边界。",
 
     docs_kicker: "快速上手",
     docs_title: "新手安装与使用",
     docs_intro: "先安装，再配置 API，最后导入历史资料并开始让 AI 学习你的习惯。",
+    docs_cta_primary: "返回下载页",
     docs_quickstart_title: "新手三步",
+    docs_quickstart_heading: "三步启动",
     docs_quickstart_1: "下载并解压对应系统的内测包（Windows 或 macOS）。",
     docs_quickstart_2: "启动桌面助手，在 API Settings 填入你的模型 API 信息。",
     docs_quickstart_3: "点击一键启动，导入历史资料和邮件线程开始使用。",
     docs_windows_title: "Windows 安装",
+    docs_windows_heading: "Windows 安装",
     docs_windows_1: "先解压到本地目录，不要在压缩包内直接运行。",
     docs_windows_2: "双击 Launch_InVault_Windows.bat。",
     docs_windows_3: "若出现安全提示，选择“更多信息 -> 仍要运行”。",
     docs_mac_title: "macOS 安装",
+    docs_mac_heading: "macOS 安装",
     docs_mac_1: "首次被拦截时，打开“系统设置 -> 隐私与安全性”。",
     docs_mac_2: "在底部找到应用拦截提示，点击“仍要打开”。",
     docs_mac_3: "若仍提示损坏，在终端执行：xattr -dr com.apple.quarantine /Applications/InVault.app。",
+    docs_followup_kicker: "AFTER INSTALL",
+    docs_followup_title: "接下来做什么",
+    docs_followup_desc: "完成安装后，优先配置 API 和模型，再导入历史资料，让外贸助理从你真实的工作语境里开始学习。",
+    docs_return_kicker: "RETURN",
+    docs_return_title: "需要安装包？回到下载页",
+    docs_return_desc: "如果你还没下载 build39，直接返回下载页获取 Windows ZIP 或 macOS DMG / ZIP。",
+    docs_return_cta: "打开下载页",
 
     privacy_kicker: "隐私宪章",
     privacy_title: "隐私与数据主权",
     privacy_intro: "外贸助理采用本地优先策略：业务资料、偏好和成长记录默认保留在你的设备中。",
     privacy_principles_title: "核心原则",
+    privacy_principle_1_heading: "默认不搬原始资料",
+    privacy_principle_2_heading: "敏感配置留在本地",
+    privacy_principle_3_heading: "迁移权掌握在你手里",
     privacy_1: "默认不上传原始历史资料到云端存储。",
     privacy_2: "敏感配置可在本地系统能力下加密保存。",
     privacy_3: "你可以导出并迁移自己的数据，不被单一平台绑定。",
-    privacy_4: "若调用第三方模型 API，请遵守对应厂商的数据政策。"
+    privacy_4: "若调用第三方模型 API，请遵守对应厂商的数据政策。",
+    privacy_policy_kicker: "MODEL POLICY",
+    privacy_policy_title: "第三方模型仍有各自规则",
+    privacy_route_kicker: "NEXT STEP",
+    privacy_route_title: "继续前，先看文档和下载页",
+    privacy_route_desc: "如果你想确认安装路径和使用流程，可以继续前往新手文档；如果已经准备好，直接去下载页拿 build39。",
+    privacy_route_cta_docs: "查看文档",
+    privacy_route_cta_download: "打开下载页",
+    privacy_aside_kicker: "LOCAL-FIRST",
+    privacy_aside_title: "角色在场，规则也要在场",
+    privacy_aside_desc: "这个世界是明亮的，但隐私边界必须讲清楚，才能让产品长期可信。",
+
+    footer_note: "故事在继续，产品也在继续生长。"
   },
   en: {
     brand_name: "Xiao Q Story Studio",
@@ -129,7 +162,6 @@
     release_desc: "A local-first, traceable, adaptive AI copilot for trade workflows. The latest build is mirrored on this site together with the docs.",
     release_cta_primary: "Open Downloads",
     release_cta_secondary: "View Quick Start",
-    footer_note: "The story keeps growing, and so do the products.",
 
     download_kicker: "Release Channel",
     download_title: "Trade Assistant Downloads",
@@ -141,35 +173,69 @@
     download_button_mac_zip: "Download macOS ZIP",
     download_mac_hint: "DMG = standard install · ZIP = portable archive",
     download_notice_title: "Install Notes",
+    download_notice_heading: "Read this before installing",
     download_notice_1: "Read the quick-start guide before installing.",
     download_notice_2: "On first launch macOS may block unknown developers. Follow the docs to allow it.",
     download_notice_3: "Keep the previous stable package so you can roll back quickly.",
     download_fallback_note: "If local site assets are unavailable, the page falls back to GitHub Release.",
+    download_route_kicker: "GET STARTED",
+    download_route_title: "Install first, then let it learn your workflow",
+    download_route_desc: "After installation, configure your API and import history so Trade Assistant can start learning from your real trade context.",
+    download_route_cta: "Open install guide",
+    download_aside_kicker: "WORLD ROUTE",
+    download_aside_title: "Get the package first, then move into docs and privacy",
+    download_aside_desc: "Downloads deliver the build, docs explain installation, and privacy defines the operating boundary.",
 
     docs_kicker: "Quick Start",
     docs_title: "Install & First Use",
     docs_intro: "Install first, configure API second, then import your history to start adaptive learning.",
+    docs_cta_primary: "Back to Downloads",
     docs_quickstart_title: "3-Step Onboarding",
+    docs_quickstart_heading: "Launch in three steps",
     docs_quickstart_1: "Download and unzip the beta package for your OS (Windows or macOS).",
     docs_quickstart_2: "Launch the desktop assistant and fill in your API settings.",
     docs_quickstart_3: "Click one-click start, then import your history and email threads.",
     docs_windows_title: "Windows Install",
+    docs_windows_heading: "Windows Install",
     docs_windows_1: "Unzip first. Do not run directly inside the zip file.",
     docs_windows_2: "Double click Launch_InVault_Windows.bat.",
     docs_windows_3: "If SmartScreen appears, click More info -> Run anyway.",
     docs_mac_title: "macOS Install",
+    docs_mac_heading: "macOS Install",
     docs_mac_1: "If blocked at first launch, open System Settings -> Privacy & Security.",
     docs_mac_2: "Find the blocked app section and click Open Anyway.",
     docs_mac_3: "If still blocked as damaged, run: xattr -dr com.apple.quarantine /Applications/InVault.app",
+    docs_followup_kicker: "AFTER INSTALL",
+    docs_followup_title: "What to do next",
+    docs_followup_desc: "Once installed, configure your model API and import history so Trade Assistant can learn from your actual workflow.",
+    docs_return_kicker: "RETURN",
+    docs_return_title: "Need the package? Go back to downloads",
+    docs_return_desc: "If you have not downloaded build39 yet, go back for the Windows ZIP or macOS DMG / ZIP.",
+    docs_return_cta: "Open downloads",
 
     privacy_kicker: "Privacy Charter",
     privacy_title: "Privacy & Data Sovereignty",
     privacy_intro: "Trade Assistant is local-first: your business data, preferences, and growth logs stay on your device by default.",
     privacy_principles_title: "Core Principles",
+    privacy_principle_1_heading: "Raw history stays with you",
+    privacy_principle_2_heading: "Sensitive settings stay local",
+    privacy_principle_3_heading: "Migration stays in your hands",
     privacy_1: "Raw history is not uploaded to cloud storage by default.",
     privacy_2: "Sensitive settings can be protected with local OS-backed encryption.",
     privacy_3: "You can export and migrate your data at any time.",
-    privacy_4: "If you use third-party model APIs, follow each provider's data policy."
+    privacy_4: "If you use third-party model APIs, follow each provider's data policy.",
+    privacy_policy_kicker: "MODEL POLICY",
+    privacy_policy_title: "Third-party models still follow their own rules",
+    privacy_route_kicker: "NEXT STEP",
+    privacy_route_title: "Before you continue, read docs and downloads",
+    privacy_route_desc: "If you want to confirm installation and usage flow, continue to the docs. If you are ready, head straight to the build39 download page.",
+    privacy_route_cta_docs: "View docs",
+    privacy_route_cta_download: "Open downloads",
+    privacy_aside_kicker: "LOCAL-FIRST",
+    privacy_aside_title: "The characters are here, but the rules must be here too",
+    privacy_aside_desc: "The world is bright on purpose, but privacy boundaries still need to be explicit if the product is meant to last.",
+
+    footer_note: "The story keeps growing, and so do the products."
   }
 };
 
@@ -256,8 +322,7 @@ function attachMagneticPull(element) {
   });
 }
 
-function initHomeMotion() {
-  if (document.body.dataset.page !== "home") return;
+function initMotion() {
   const allowMotion = window.matchMedia("(pointer: fine)").matches &&
     !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!allowMotion) return;
@@ -277,18 +342,20 @@ function initHomeMotion() {
 
   document.querySelectorAll("[data-magnetic]").forEach(attachMagneticPull);
 
-  const heroMedia = document.querySelector("[data-parallax='hero-media'] img");
-  const hero = document.querySelector(".story-hero");
-  if (hero && heroMedia) {
-    hero.addEventListener("pointermove", (event) => {
-      const rect = hero.getBoundingClientRect();
-      const offsetX = event.clientX - (rect.left + rect.width / 2);
-      const offsetY = event.clientY - (rect.top + rect.height / 2);
-      heroMedia.style.transform = `scale(1.03) translate3d(${(offsetX * 0.006).toFixed(2)}px, ${(offsetY * 0.008).toFixed(2)}px, 0)`;
-    });
-    hero.addEventListener("pointerleave", () => {
-      heroMedia.style.transform = "scale(1.01)";
-    });
+  if (document.body.dataset.page === "home") {
+    const heroMedia = document.querySelector("[data-parallax='hero-media'] img");
+    const hero = document.querySelector(".story-hero");
+    if (hero && heroMedia) {
+      hero.addEventListener("pointermove", (event) => {
+        const rect = hero.getBoundingClientRect();
+        const offsetX = event.clientX - (rect.left + rect.width / 2);
+        const offsetY = event.clientY - (rect.top + rect.height / 2);
+        heroMedia.style.transform = `scale(1.03) translate3d(${(offsetX * 0.006).toFixed(2)}px, ${(offsetY * 0.008).toFixed(2)}px, 0)`;
+      });
+      hero.addEventListener("pointerleave", () => {
+        heroMedia.style.transform = "scale(1.01)";
+      });
+    }
   }
 }
 
@@ -367,7 +434,7 @@ function init() {
   const lang = localStorage.getItem("ta_lang") || "zh";
   applyLang(lang);
   setFooterYear();
-  initHomeMotion();
+  initMotion();
   initReleaseData();
 
   const toggle = byId("lang-toggle");

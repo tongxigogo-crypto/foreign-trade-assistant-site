@@ -5,76 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>下载 - Xiao Q Story Studio</title>
   <meta name="description" content="下载外贸助理 Trade Assistant 的最新 Windows 与 macOS build39 版本。" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
-<body data-page="download" class="min-h-screen bg-[#fbf7ef] text-[#2d271f] antialiased">
-  <div class="pointer-events-none fixed inset-0 overflow-hidden">
-    <div class="absolute -left-24 -top-20 h-96 w-96 rounded-full bg-amber-200/60 blur-3xl"></div>
-    <div class="absolute -right-24 top-24 h-[32rem] w-[32rem] rounded-full bg-sky-200/60 blur-3xl"></div>
-  </div>
-
-  <header class="fixed left-1/2 top-4 z-50 w-[96%] max-w-7xl -translate-x-1/2 rounded-[22px] border border-[#d8c59d]/40 bg-white/75 px-4 py-3 backdrop-blur-xl md:px-6">
-    <div class="flex items-center justify-between gap-3">
-      <a href="./index.html" class="flex items-center gap-3">
-        <span class="grid h-8 w-8 place-items-center rounded-xl bg-amber-500 text-xs font-black text-white">Q</span>
-        <div>
-          <p class="text-sm font-bold tracking-tight text-[#2d271f]" data-i18n="brand_name">Xiao Q Story Studio</p>
-          <p class="text-[10px] text-[#6d6559]" data-i18n="brand_tagline">Dreamlike worlds, living products, and growing experiments.</p>
-        </div>
-      </a>
-      <nav class="flex items-center gap-2 text-xs text-[#2d271f] md:gap-5 md:text-sm">
-        <a href="./index.html" class="hover:text-amber-600" data-i18n="nav_home">首页</a>
-        <a href="./download.html" class="hover:text-amber-600" data-i18n="nav_download">外贸助理下载</a>
-        <a href="./docs.html" class="hover:text-amber-600" data-i18n="nav_docs">外贸助理文档</a>
-        <a href="./privacy.html" class="hover:text-amber-600" data-i18n="nav_privacy">外贸助理隐私</a>
-        <button id="lang-toggle" type="button" class="rounded-full border border-[#d8c59d] px-3 py-1 text-xs text-[#2d271f] hover:border-amber-500">EN</button>
-      </nav>
-    </div>
+<body data-page="download" class="xq-site info-page">
+  <header class="site-header">
+    <a class="site-brand" href="./index.html">
+      <span class="site-brand__mark">Q</span>
+      <span>
+        <strong data-i18n="brand_name">Xiao Q Story Studio</strong>
+        <em data-i18n="brand_tagline">Dreamlike worlds, living products, and growing experiments.</em>
+      </span>
+    </a>
+    <nav class="site-nav">
+      <a href="./index.html" data-i18n="nav_home">首页</a>
+      <a href="./download.html" data-i18n="nav_download">外贸助理下载</a>
+      <a href="./docs.html" data-i18n="nav_docs">外贸助理文档</a>
+      <a href="./privacy.html" data-i18n="nav_privacy">外贸助理隐私</a>
+      <button id="lang-toggle" class="lang-toggle" type="button">EN</button>
+    </nav>
   </header>
 
-  <main class="relative mx-auto max-w-7xl px-4 pb-16 pt-28 md:px-6 md:pt-32">
-    <section class="rounded-[28px] border border-[#dbc9a7]/55 bg-white/80 p-6 shadow-[0_24px_80px_rgba(86,58,18,0.08)] backdrop-blur-xl">
-      <p class="text-xs uppercase tracking-[0.2em] text-amber-700" data-i18n="download_kicker">发布渠道</p>
-      <h1 class="mt-3 text-4xl font-black tracking-tight text-[#2d271f] md:text-6xl" data-i18n="download_title">外贸助理下载</h1>
-      <p class="mt-3 max-w-3xl text-sm text-[#6d6559] md:text-base" data-i18n="download_subtitle">站内优先托管最新 build39 安装包，并保留 GitHub Release 回退路径。</p>
-      <p class="mt-4 text-sm text-[#6d6559]"><span data-i18n="release_label">当前版本</span>: <strong id="version-tag" class="text-[#2d271f]">loading...</strong></p>
-    </section>
-
-    <section class="mt-8 grid gap-4 md:grid-cols-2">
-      <article class="rounded-[26px] border border-[#dbc9a7]/55 bg-white/80 p-6 shadow-[0_18px_54px_rgba(86,58,18,0.08)]">
-        <h2 class="text-xl font-bold text-[#2d271f]" data-i18n="download_card_win_title">Windows</h2>
-        <p id="win-asset-name" class="mt-2 text-sm text-[#6d6559]">-</p>
-        <a id="win-download" class="mt-5 inline-flex min-h-[48px] items-center rounded-full bg-amber-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_32px_rgba(180,129,39,0.22)]" href="#" aria-disabled="true" data-i18n="download_button_win">下载 Windows ZIP</a>
-      </article>
-      <article class="rounded-[26px] border border-[#dbc9a7]/55 bg-white/80 p-6 shadow-[0_18px_54px_rgba(86,58,18,0.08)]">
-        <h2 class="text-xl font-bold text-[#2d271f]" data-i18n="download_card_mac_title">macOS</h2>
-        <p id="mac-dmg-asset-name" class="mt-2 text-sm text-[#6d6559]">-</p>
-        <div class="mt-5 flex flex-wrap gap-3">
-          <a id="mac-download-dmg" class="inline-flex min-h-[48px] items-center rounded-full bg-amber-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_32px_rgba(180,129,39,0.22)]" href="#" aria-disabled="true" data-i18n="download_button_mac_dmg">下载 macOS DMG</a>
-          <a id="mac-download-zip" class="inline-flex min-h-[48px] items-center rounded-full border border-[#d8c59d] bg-white px-5 py-3 text-sm font-semibold text-[#2d271f]" href="#" aria-disabled="true" data-i18n="download_button_mac_zip">下载 macOS ZIP</a>
+  <main class="info-shell">
+    <section class="info-hero">
+      <div class="info-hero__content">
+        <p class="story-section__eyebrow" data-i18n="download_kicker">发布渠道</p>
+        <h1 data-pretext="intense" data-i18n="download_title">外贸助理下载</h1>
+        <p data-i18n="download_subtitle">站内优先托管最新 build39 安装包，并保留 GitHub Release 回退路径。</p>
+        <div class="info-hero__meta">
+          <span data-i18n="release_label">当前版本</span>
+          <strong id="version-tag">loading...</strong>
         </div>
-        <p class="mt-4 text-xs text-[#6d6559]" data-i18n="download_mac_hint">DMG = 常规安装 · ZIP = 便携解压</p>
-        <p id="mac-zip-asset-name" class="mt-2 text-xs text-[#8b7d6a]">-</p>
+      </div>
+      <div class="info-hero__aside info-hero__aside--feature">
+        <img src="./assets/xiaoq-hero-desktop.jpg" alt="小Q故事宇宙主视觉" />
+        <div class="info-hero__aside-note">
+          <span data-i18n="download_aside_kicker">WORLD ROUTE</span>
+          <strong data-i18n="download_aside_title">先拿到安装包，再进入文档和隐私说明</strong>
+          <p data-i18n="download_aside_desc">下载页负责交付，文档页负责安装，隐私页负责说明边界。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="download-grid">
+      <article class="info-card info-card--download">
+        <div class="info-card__head">
+          <span class="info-card__eyebrow">Windows</span>
+          <h2 data-pretext data-i18n="download_card_win_title">Windows</h2>
+        </div>
+        <p id="win-asset-name" class="info-card__muted">-</p>
+        <div class="info-card__actions">
+          <a id="win-download" class="story-button story-button--primary" href="#" aria-disabled="true" data-i18n="download_button_win" data-magnetic>下载 Windows ZIP</a>
+        </div>
+      </article>
+
+      <article class="info-card info-card--download">
+        <div class="info-card__head">
+          <span class="info-card__eyebrow">macOS</span>
+          <h2 data-pretext data-i18n="download_card_mac_title">macOS</h2>
+        </div>
+        <p id="mac-dmg-asset-name" class="info-card__muted">-</p>
+        <div class="info-card__actions info-card__actions--stacked">
+          <a id="mac-download-dmg" class="story-button story-button--primary" href="#" aria-disabled="true" data-i18n="download_button_mac_dmg" data-magnetic>下载 macOS DMG</a>
+          <a id="mac-download-zip" class="story-button story-button--secondary" href="#" aria-disabled="true" data-i18n="download_button_mac_zip" data-magnetic>下载 macOS ZIP</a>
+        </div>
+        <p class="info-card__hint" data-i18n="download_mac_hint">DMG = 常规安装 · ZIP = 便携解压</p>
+        <p id="mac-zip-asset-name" class="info-card__caption">-</p>
       </article>
     </section>
 
-    <section class="mt-8 rounded-[26px] border border-[#dbc9a7]/55 bg-white/80 p-6 shadow-[0_18px_54px_rgba(86,58,18,0.08)]">
-      <h2 class="text-lg font-bold text-[#2d271f]" data-i18n="download_notice_title">安装提示</h2>
-      <ul class="mt-3 list-disc space-y-2 pl-5 text-sm text-[#6d6559]">
-        <li data-i18n="download_notice_1">先看新手文档，再开始安装。</li>
-        <li data-i18n="download_notice_2">macOS 首次可能出现“未验证开发者”，按文档流程放行。</li>
-        <li data-i18n="download_notice_3">建议保留上一个稳定包，出现问题可快速回滚。</li>
-      </ul>
-      <p class="mt-4 text-xs text-[#6d6559]" data-i18n="download_fallback_note">如果站内资源不可用，页面会自动回退到 GitHub Release。</p>
+    <section class="info-grid info-grid--two">
+      <article class="info-card">
+        <div class="info-card__head">
+          <span class="info-card__eyebrow" data-i18n="download_notice_title">安装提示</span>
+          <h2 data-pretext data-i18n="download_notice_heading">安装前先看这一页</h2>
+        </div>
+        <ul class="info-list">
+          <li data-i18n="download_notice_1">先看新手文档，再开始安装。</li>
+          <li data-i18n="download_notice_2">macOS 首次可能出现“未验证开发者”，按文档流程放行。</li>
+          <li data-i18n="download_notice_3">建议保留上一个稳定包，出现问题可快速回滚。</li>
+        </ul>
+        <p class="info-card__caption" data-i18n="download_fallback_note">如果站内资源不可用，页面会自动回退到 GitHub Release。</p>
+      </article>
+
+      <article class="info-card">
+        <div class="info-card__head">
+          <span class="info-card__eyebrow" data-i18n="download_route_kicker">GET STARTED</span>
+          <h2 data-pretext data-i18n="download_route_title">先装，再让它学会你的习惯</h2>
+        </div>
+        <p data-i18n="download_route_desc">安装完成后，先配置 API，再导入历史资料和邮件线程，让外贸助理开始在真实业务语境里成长。</p>
+        <div class="info-card__actions">
+          <a class="story-button story-button--secondary" href="./docs.html" data-i18n="download_route_cta" data-magnetic>打开安装文档</a>
+        </div>
+      </article>
     </section>
   </main>
 
-  <footer class="relative px-4 py-6 md:px-6">
-    <div class="mx-auto flex max-w-7xl items-center justify-between text-xs text-[#6d6559]">
-      <p>© <span id="year"></span> Xiao Q Story Studio</p>
-      <p data-i18n="footer_note">故事在继续，产品也在继续生长。</p>
-    </div>
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Xiao Q Story Studio</p>
+    <p data-i18n="footer_note">故事在继续，产品也在继续生长。</p>
   </footer>
 
   <script src="./app.js"></script>
