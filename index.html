@@ -34,119 +34,48 @@
   </header>
 
   <main>
-    <section class="story-hero">
+    <section class="story-hero story-hero--plaza">
       <picture class="story-hero__media" data-parallax="hero-media">
-        <source media="(max-width: 768px)" srcset="./assets/xiaoq-hero-mobile.jpg" />
-        <img src="./assets/xiaoq-hero-desktop.jpg" alt="小Q与豆子站在梦幻工作室小镇广场中央" />
+        <source media="(max-width: 768px)" srcset="./assets/plaza-mobile.png" />
+        <img src="./assets/plaza-desktop.png" alt="小Q与豆子站在梦幻工作室小镇广场中央，后方建筑代表图片画廊、外贸助理发布中心、小程序开发工坊与 AI Agent 终端馆。" />
       </picture>
       <div class="story-hero__veil"></div>
+      <div class="story-hero__focus" data-parallax="hero-host" aria-hidden="true"></div>
       <div class="story-hero__content">
-        <p class="story-eyebrow" data-i18n="hero_kicker">PERSONAL DIGITAL UNIVERSE</p>
-        <h1 class="story-title">
-          <span data-i18n="hero_title_line_1" data-pretext="intense">小Q的</span>
-          <span data-i18n="hero_title_line_2" data-pretext="intense">故事宇宙</span>
-        </h1>
-        <p class="story-lead" data-i18n="hero_lead">在这座明亮梦幻的工作室小镇里，小Q带你进入他的世界；豆子会一直跟在身后，四个平行空间也会在这里慢慢展开。</p>
-        <div class="story-actions">
-          <a class="story-button story-button--primary" href="./download.html" data-i18n="hero_cta_primary" data-magnetic>体验外贸助理</a>
-          <a class="story-button story-button--secondary" href="./docs.html" data-i18n="hero_cta_secondary" data-magnetic>查看项目文档</a>
+        <div class="story-hero__copy">
+          <p class="story-eyebrow" data-i18n="hero_kicker">PERSONAL DIGITAL UNIVERSE</p>
+          <h1 class="story-title story-title--compact">
+            <span data-i18n="hero_title_line_1" data-pretext="intense">小Q的</span>
+            <span data-i18n="hero_title_line_2" data-pretext="intense">故事宇宙</span>
+          </h1>
+          <p class="story-lead story-lead--compact" data-i18n="hero_plaza_lead">首页就是一座可游玩的工作室广场。四个功能入口已经融入后排建筑，小Q会带着豆子在前景迎宾。</p>
+          <p class="story-hint" data-i18n="hero_pointer_hint">把鼠标移向广场，小Q会轻轻跟着你转身。</p>
         </div>
-        <div class="story-portals" id="worlds-nav">
-          <a class="story-portal" href="#world-gallery" data-magnetic>
-            <span class="story-portal__label" data-i18n="world_gallery_name">图片画廊</span>
-            <span class="story-portal__desc" data-i18n="world_gallery_desc">收集小Q和豆子的角色图、故事图和视觉片段。</span>
-          </a>
-          <a class="story-portal story-portal--focus" href="#world-trade" data-magnetic>
-            <span class="story-portal__label" data-i18n="world_trade_name">外贸助理发布中心</span>
-            <span class="story-portal__desc" data-i18n="world_trade_desc">外贸助理的最新发布、下载与说明都在这里。</span>
-          </a>
-          <a class="story-portal" href="#world-workshop" data-magnetic>
-            <span class="story-portal__label" data-i18n="world_workshop_name">小程序开发工坊</span>
-            <span class="story-portal__desc" data-i18n="world_workshop_desc">展示小程序、开发作品和创作过程。</span>
-          </a>
-          <a class="story-portal" href="#world-agent" data-magnetic>
-            <span class="story-portal__label" data-i18n="world_agent_name">AI Agent 终端馆</span>
-            <span class="story-portal__desc" data-i18n="world_agent_desc">共享和体验 AI Agent 的实验空间。</span>
-          </a>
-        </div>
-      </div>
-    </section>
 
-    <section class="story-section story-section--statement">
-      <div class="story-section__intro">
-        <p class="story-section__eyebrow" data-i18n="second_kicker">WORLD NOTE</p>
-        <h2 data-pretext data-i18n="second_title">这不是普通作品集</h2>
-        <p data-i18n="second_statement">这里不是普通作品集，而是一座会持续生长的个人数字世界。</p>
-      </div>
-    </section>
+        <nav class="plaza-hotspots" aria-label="World entrances">
+          <a class="plaza-hotspot plaza-hotspot--gallery" href="./gallery.html" data-magnetic>
+            <span class="plaza-hotspot__pulse"></span>
+            <span class="plaza-hotspot__label" data-i18n="world_gallery_name">图片画廊</span>
+          </a>
+          <a class="plaza-hotspot plaza-hotspot--trade" href="./download.html" data-magnetic>
+            <span class="plaza-hotspot__pulse"></span>
+            <span class="plaza-hotspot__label" data-i18n="world_trade_name">外贸助理发布中心</span>
+          </a>
+          <a class="plaza-hotspot plaza-hotspot--workshop" href="./workshop.html" data-magnetic>
+            <span class="plaza-hotspot__pulse"></span>
+            <span class="plaza-hotspot__label" data-i18n="world_workshop_name">小程序开发工坊</span>
+          </a>
+          <a class="plaza-hotspot plaza-hotspot--agent" href="./agents.html" data-magnetic>
+            <span class="plaza-hotspot__pulse"></span>
+            <span class="plaza-hotspot__label" data-i18n="world_agent_name">AI Agent 终端馆</span>
+          </a>
+        </nav>
 
-    <section class="story-section story-worlds">
-      <article id="world-gallery" class="world-card world-card--gallery">
-        <div class="world-card__meta">01 / GALLERY</div>
-        <h3 data-i18n="world_gallery_name">图片画廊</h3>
-        <p data-i18n="world_gallery_desc">收集小Q和豆子的角色图、故事图和视觉片段。</p>
-      </article>
-      <article id="world-trade" class="world-card world-card--trade">
-        <div class="world-card__meta">02 / LAUNCH</div>
-        <h3 data-i18n="world_trade_name">外贸助理发布中心</h3>
-        <p data-i18n="world_trade_desc">外贸助理的最新发布、下载与说明都在这里。</p>
-        <div class="world-card__actions">
-          <a href="./download.html" data-i18n="world_trade_action_primary">下载最新版本</a>
-          <a href="./docs.html" data-i18n="world_trade_action_secondary">阅读安装文档</a>
-        </div>
-      </article>
-      <article id="world-workshop" class="world-card world-card--workshop">
-        <div class="world-card__meta">03 / WORKSHOP</div>
-        <h3 data-i18n="world_workshop_name">小程序开发工坊</h3>
-        <p data-i18n="world_workshop_desc">展示小程序、开发作品和创作过程。</p>
-      </article>
-      <article id="world-agent" class="world-card world-card--agent">
-        <div class="world-card__meta">04 / AGENT</div>
-        <h3 data-i18n="world_agent_name">AI Agent 终端馆</h3>
-        <p data-i18n="world_agent_desc">共享和体验 AI Agent 的实验空间。</p>
-      </article>
-    </section>
-
-    <section class="story-section story-characters">
-      <div class="story-section__intro story-section__intro--tight">
-        <p class="story-section__eyebrow" data-i18n="characters_kicker">HOSTS OF THE WORLD</p>
-        <h2 data-pretext data-i18n="characters_title">小Q带路，豆子跟着跑</h2>
-        <p data-i18n="characters_lead">他们不是静态吉祥物，而是这个世界的迎宾角色和记忆锚点。</p>
-      </div>
-      <div class="character-grid">
-        <article class="character-card">
-          <img src="./assets/xiaoq-ref.jpg" alt="小Q角色参考图" />
-          <div>
-            <h3 data-i18n="character_xiaoq_name">小Q</h3>
-            <p data-i18n="character_xiaoq_desc">黑色拉布拉多，聪明、略带小得意，是这座世界的门童和向导。</p>
-          </div>
-        </article>
-        <article class="character-card">
-          <img src="./assets/douzi-ref.jpg" alt="豆子角色参考图" />
-          <div>
-            <h3 data-i18n="character_douzi_name">豆子</h3>
-            <p data-i18n="character_douzi_desc">柯基，跟班和情绪补位者，负责探头、贴近和让世界更有趣。</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="story-section story-release">
-      <div class="release-card">
-        <div>
-          <p class="story-section__eyebrow" data-i18n="release_kicker">CURRENT RELEASE</p>
-          <h2 data-pretext data-i18n="release_title">外贸助理正在持续发布</h2>
-          <p data-i18n="release_desc">本地优先、可追溯、可成长的外贸 AI 参谋。当前版本会同步到这个个人站的下载页与文档页。</p>
-        </div>
-        <div class="release-meta">
-          <div>
-            <span data-i18n="release_label">当前版本</span>
-            <strong id="home-version-tag">build39</strong>
-          </div>
-          <div class="release-meta__actions">
-            <a class="story-button story-button--primary" href="./download.html" data-i18n="release_cta_primary" data-magnetic>打开下载页</a>
-            <a class="story-button story-button--secondary" href="./docs.html" data-i18n="release_cta_secondary" data-magnetic>查看新手文档</a>
-          </div>
+        <div class="plaza-mobile-dock">
+          <a href="./gallery.html" data-i18n="world_gallery_name">图片画廊</a>
+          <a href="./download.html" data-i18n="world_trade_name">外贸助理发布中心</a>
+          <a href="./workshop.html" data-i18n="world_workshop_name">小程序开发工坊</a>
+          <a href="./agents.html" data-i18n="world_agent_name">AI Agent 终端馆</a>
         </div>
       </div>
     </section>
@@ -160,3 +89,6 @@
   <script src="./app.js"></script>
 </body>
 </html>
+
+
+

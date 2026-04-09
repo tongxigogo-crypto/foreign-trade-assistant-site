@@ -12,6 +12,8 @@
     hero_title_line_1: "小Q的",
     hero_title_line_2: "故事宇宙",
     hero_lead: "在这座明亮梦幻的工作室小镇里，小Q带你进入他的世界；豆子会一直跟在身后，四个平行空间也会在这里慢慢展开。",
+    hero_plaza_lead: "首页就是一座可游玩的工作室广场。四个功能入口已经融入后排建筑，小Q会带着豆子在前景迎宾。",
+    hero_pointer_hint: "把鼠标移向广场，小Q会轻轻跟着你转身。",
     hero_cta_primary: "体验外贸助理",
     hero_cta_secondary: "查看项目文档",
 
@@ -131,6 +133,8 @@
     hero_title_line_1: "Xiao Q's",
     hero_title_line_2: "Story Universe",
     hero_lead: "In this bright, dreamlike studio town, Xiao Q guides you into his world. Douzi stays close behind, while four parallel spaces unfold around the square.",
+    hero_plaza_lead: "The homepage is one playable studio plaza. The four function entrances are embedded into the buildings behind the square, while Xiao Q and Douzi welcome visitors in the foreground.",
+    hero_pointer_hint: "Move your cursor across the plaza and Xiao Q will subtly follow your direction.",
     hero_cta_primary: "Try Trade Assistant",
     hero_cta_secondary: "Read the Docs",
 
@@ -344,16 +348,23 @@ function initMotion() {
 
   if (document.body.dataset.page === "home") {
     const heroMedia = document.querySelector("[data-parallax='hero-media'] img");
+    const heroFocus = document.querySelector("[data-parallax='hero-host']");
     const hero = document.querySelector(".story-hero");
     if (hero && heroMedia) {
       hero.addEventListener("pointermove", (event) => {
         const rect = hero.getBoundingClientRect();
         const offsetX = event.clientX - (rect.left + rect.width / 2);
         const offsetY = event.clientY - (rect.top + rect.height / 2);
-        heroMedia.style.transform = `scale(1.03) translate3d(${(offsetX * 0.006).toFixed(2)}px, ${(offsetY * 0.008).toFixed(2)}px, 0)`;
+        heroMedia.style.transform = `scale(1.02) translate3d(${(offsetX * 0.0035).toFixed(2)}px, ${(offsetY * 0.0045).toFixed(2)}px, 0)`;
+        if (heroFocus) {
+          heroFocus.style.transform = `translate3d(${(offsetX * 0.012).toFixed(2)}px, ${(offsetY * 0.01).toFixed(2)}px, 0)`;
+        }
       });
       hero.addEventListener("pointerleave", () => {
         heroMedia.style.transform = "scale(1.01)";
+        if (heroFocus) {
+          heroFocus.style.transform = "translate3d(0, 0, 0)";
+        }
       });
     }
   }
@@ -447,3 +458,4 @@ function init() {
 }
 
 init();
+
